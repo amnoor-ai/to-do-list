@@ -1,6 +1,7 @@
 const input = document.querySelector("input");
 const addBtn = document.querySelector("button");
 const list = document.querySelector(".list");
+const toggleBtn = document.getElementById("themeToggle");
 
 // Load tasks from localStorage
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
@@ -57,6 +58,24 @@ addBtn.addEventListener("click", () => {
     saveTasks();
     renderTasks();
     input.value = "";
+});
+
+// Dark Mode
+
+//load saved theme
+if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark");
+}
+
+//toggle theme
+toggleBtn.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+
+    if (document.body.classList.contains("dark")) {
+        localStorage.setItem("theme", "dark");
+    } else {
+        localStorage.setItem("theme", "light");
+    }
 });
 
 // Initial render
